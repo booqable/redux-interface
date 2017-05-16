@@ -9,20 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jhnvz/redux-interface.git"
+    "url": "git+https://github.com/booqable/redux-interface.git"
   },
   "keywords": [
     "react-component",
     "redux",
-    "redux-ui",
+    "redux-interface",
     "ui"
   ],
   "author": "Johan van Zonneveld",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jhnvz/redux-interface/issues"
+    "url": "https://github.com/booqable/redux-interface/issues"
   },
-  "homepage": "https://github.com/tonyhb/redux-ui#readme",
+  "homepage": "https://github.com/booqable/redux-interface#readme",
   "devDependencies": {
     "babel-cli": "6.5.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
