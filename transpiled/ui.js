@@ -50,7 +50,7 @@ function decorate(key) {
     return {
       uiKey: uiKey,
       uiDefaults: opts.state || {},
-      ui: state.ui.get(uiKey) || opts.state
+      ui: state.interface.get(uiKey) || opts.state
     };
   };
 
