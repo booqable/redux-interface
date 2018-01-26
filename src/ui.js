@@ -35,6 +35,7 @@ export default function decorate(key, opts = {}) {
   return (WrappedComponent) => {
     return connector(
       class UI extends Component {
+        static displayName = `ReduxInterface(${WrappedComponent.displayName})`
 
         componentWillMount() {
           this.props.mountUI(this.props.uiKey, this.props.uiDefaults);
