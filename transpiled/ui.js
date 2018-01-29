@@ -62,7 +62,7 @@ function decorate(key) {
     }, dispatch);
   };
 
-  var connect = opts.connectWith || _reactRedux.reduxCconnect;
+  var connect = opts.connectWith || _reactRedux.reduxConnect;
   var connector = connect(mapStateToProps, mapDispatchToProps);
 
   return function (WrappedComponent) {
