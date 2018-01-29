@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 const { any, array, func, node, object, string } = PropTypes;
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { reduxCconnect } from 'react-redux';
 import { updateUI, mountUI, unmountUI } from './reducer';
 
 export default function decorate(key, opts = {}) {
@@ -13,7 +13,7 @@ export default function decorate(key, opts = {}) {
   }
 
   function mapStateToProps(state, props) {
-    let uiKey = [key, props.uiKey].join('');
+    const uiKey = [key, props.uiKey].join('');
 
     return {
       uiKey: uiKey,
@@ -30,6 +30,7 @@ export default function decorate(key, opts = {}) {
     }, dispatch);
   };
 
+  const connect = opts.connectWith || reduxCconnect;
   const connector = connect(mapStateToProps, mapDispatchToProps);
 
   return (WrappedComponent) => {

@@ -62,10 +62,13 @@ function decorate(key) {
     }, dispatch);
   };
 
-  var connector = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps);
+  var connect = opts.connectWith || _reactRedux.reduxCconnect;
+  var connector = connect(mapStateToProps, mapDispatchToProps);
 
   return function (WrappedComponent) {
-    return connector(function (_Component) {
+    var _class, _temp;
+
+    return connector((_temp = _class = function (_Component) {
       _inherits(UI, _Component);
 
       function UI() {
@@ -105,6 +108,6 @@ function decorate(key) {
       }]);
 
       return UI;
-    }(_react.Component));
+    }(_react.Component), _class.displayName = 'ReduxInterface(' + WrappedComponent.displayName + ')', _temp));
   };
 }
