@@ -13,7 +13,7 @@ export default function decorate(key, opts = {}) {
   }
 
   function mapStateToProps(state, props) {
-    const uiKey = [key, props.uiKey].join('-')
+    const uiKey = [key, props.uiKey].join('')
 
     return {
       uiKey: uiKey,

@@ -45,7 +45,7 @@ function decorate(key) {
   }
 
   function mapStateToProps(state, props) {
-    var uiKey = [key, props.uiKey].join('-');
+    var uiKey = [key, props.uiKey].join('');
 
     return {
       uiKey: uiKey,
