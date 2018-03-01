@@ -45,14 +45,14 @@ function decorate(key) {
   }
 
   function mapStateToProps(state, props) {
-    var uiKey = [key, props.uiKey].join('');
+    var uiKey = [key, props.uiKey].join('-');
 
     return {
       uiKey: uiKey,
       uiDefaults: opts.state || {},
       ui: state.interface.get(uiKey) || opts.state
     };
-  };
+  }
 
   function mapDispatchToProps(dispatch, props) {
     return (0, _redux.bindActionCreators)({
@@ -60,7 +60,7 @@ function decorate(key) {
       mountUI: _reducer.mountUI,
       unmountUI: _reducer.unmountUI
     }, dispatch);
-  };
+  }
 
   var connect = opts.connectWith || _reactRedux.connect;
   var connector = connect(mapStateToProps, mapDispatchToProps);
@@ -68,16 +68,16 @@ function decorate(key) {
   return function (WrappedComponent) {
     var _class, _temp;
 
-    return connector((_temp = _class = function (_Component) {
-      _inherits(UI, _Component);
+    var InterfaceComponent = (_temp = _class = function (_Component) {
+      _inherits(InterfaceComponent, _Component);
 
-      function UI() {
-        _classCallCheck(this, UI);
+      function InterfaceComponent() {
+        _classCallCheck(this, InterfaceComponent);
 
-        return _possibleConstructorReturn(this, (UI.__proto__ || Object.getPrototypeOf(UI)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (InterfaceComponent.__proto__ || Object.getPrototypeOf(InterfaceComponent)).apply(this, arguments));
       }
 
-      _createClass(UI, [{
+      _createClass(InterfaceComponent, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
           this.props.mountUI(this.props.uiKey, this.props.uiDefaults);
@@ -85,14 +85,17 @@ function decorate(key) {
       }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-          // console.log('unmount');
-          // if (opts.persist !== true) {
-          //   if (window && window.requestAnimationFrame) {
-          //     window.requestAnimationFrame(() => this.props.unmountUI(this.props.uiKey););
-          //   } else {
-          //     this.props.unmountUI(this.props.uiKey);;
-          //   }
-          // }
+          var _this2 = this;
+
+          if (opts.persist !== true) {
+            if (window && window.requestAnimationFrame) {
+              window.requestAnimationFrame(function () {
+                return _this2.props.unmountUI(_this2.props.uiKey);
+              });
+            } else {
+              this.props.unmountUI(this.props.uiKey);
+            }
+          }
         }
       }, {
         key: 'updateUI',
@@ -102,12 +105,37 @@ function decorate(key) {
       }, {
         key: 'render',
         value: function render() {
-          return _react2.default.createElement(WrappedComponent, _extends({}, this.props, {
-            updateUI: this.updateUI.bind(this) }));
+          return _react2.default.createElement(WrappedComponent, _extends({}, this.props, { updateUI: this.updateUI.bind(this) }));
         }
       }]);
 
-      return UI;
-    }(_react.Component), _class.displayName = 'ReduxInterface(' + WrappedComponent.displayName + ')', _temp));
+      return InterfaceComponent;
+    }(_react.Component), _class.displayName = 'ReduxInterface(' + WrappedComponent.displayName + ')', _temp);
+
+
+    var ConnectedComponent = connector(InterfaceComponent);
+
+    var ComponentWithKey = function (_Component2) {
+      _inherits(ComponentWithKey, _Component2);
+
+      function ComponentWithKey() {
+        _classCallCheck(this, ComponentWithKey);
+
+        return _possibleConstructorReturn(this, (ComponentWithKey.__proto__ || Object.getPrototypeOf(ComponentWithKey)).apply(this, arguments));
+      }
+
+      _createClass(ComponentWithKey, [{
+        key: 'render',
+        value: function render() {
+          this.uiKey = this.uiKey || this.props.uiKey || cuid();
+
+          return _react2.default.createElement(ConnectedComponent, _extends({ uiKey: this.uiKey }, this.props));
+        }
+      }]);
+
+      return ComponentWithKey;
+    }(_react.Component);
+
+    return ComponentWithKey;
   };
 }

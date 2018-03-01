@@ -44,7 +44,7 @@ function reducer() {
   }
 
   return state;
-};
+}
 
 function updateUI(key, values) {
   return {
@@ -54,7 +54,7 @@ function updateUI(key, values) {
       values: values
     }
   };
-};
+}
 
 function mountUI(key, defaults) {
   return {
@@ -73,4 +73,4 @@ function unmountUI(key) {
       key: key
     }
   };
-};
+}
