@@ -1,36 +1,36 @@
-'use strict';
+'use strict'
 
-import { Map, Record } from 'immutable';
+import { Map, Record } from 'immutable'
 
-export const UPDATE_UI = 'UPDATE_UI';
-const MOUNT_UI = 'MOUNT_UI';
-const UNMOUNT_UI = 'UNMOUNT_UI';
+export const UPDATE_UI = 'UPDATE_UI'
+const MOUNT_UI = 'MOUNT_UI'
+const UNMOUNT_UI = 'UNMOUNT_UI'
 
-const defaultState = new Map({});
+const defaultState = new Map({})
 
 export default function reducer(state = defaultState, action) {
   let key = action.payload && action.payload.key
 
   switch (action.type) {
     case MOUNT_UI:
-      const { defaults } = action.payload;
-      let Defaults = Record(defaults);
+      const { defaults } = action.payload
+      let Defaults = Record(defaults)
 
-      state = state.set(key, new Defaults);
-      break;
+      state = state.set(key, new Defaults)
+      break
     case UPDATE_UI:
-      const { values } = action.payload;
+      const { values } = action.payload
 
-      let currentValues = state.get(key);
-      state = state.set(key, currentValues.merge(values));
-      break;
+      let currentValues = state.get(key)
+      state = state.set(key, currentValues.merge(values))
+      break
     case UNMOUNT_UI:
-      state = state.delete(key);
-      break;
+      state = state.delete(key)
+      break
   }
 
-  return state;
-};
+  return state
+}
 
 export function updateUI(key, values) {
   return {
@@ -39,8 +39,8 @@ export function updateUI(key, values) {
       key,
       values
     }
-  };
-};
+  }
+}
 
 export function mountUI(key, defaults) {
   return {
@@ -58,5 +58,5 @@ export function unmountUI(key) {
     payload: {
       key
     }
-  };
-};
+  }
+}
