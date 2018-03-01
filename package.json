@@ -1,6 +1,6 @@
 {
   "name": "redux-interface",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "UI state management for Redux and React",
   "main": "transpiled/index.js",
   "scripts": {
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "babel-register": "^6.6.0",
+    "cuid": "^2.1.0",
     "immutable": "^3.7.5",
     "invariant": "^2.2.0",
     "react": "^0.14.3 || ^15.0.1",

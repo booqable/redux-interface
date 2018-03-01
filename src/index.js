@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
-import decorate from './ui';
-import reducer from './reducer';
-import { updateUI } from './reducer';
+import decorate from './ui'
+import reducer from './reducer'
+import { updateUI } from './reducer'
 
-export default decorate;
-export { reducer };
-export { decorate };
-export { updateUI };
+export default decorate
+export { reducer }
+export { decorate }
+export { updateUI }
