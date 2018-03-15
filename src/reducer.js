@@ -22,7 +22,10 @@ export default function reducer(state = defaultState, action) {
       const { values } = action.payload
 
       let currentValues = state.get(key)
-      state = state.set(key, currentValues.merge(values))
+
+      if (currentValues) {
+        state = state.set(key, currentValues.merge(values))
+      }
       break
     case UNMOUNT_UI:
       state = state.delete(key)
