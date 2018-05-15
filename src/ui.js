@@ -5,6 +5,7 @@ const { any, array, func, node, object, string } = PropTypes
 import { bindActionCreators } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import { updateUI, mountUI, unmountUI } from './reducer'
+import cuid from 'cuid'
 
 export default function decorate(key, opts = {}) {
   if (typeof key === 'object') {
