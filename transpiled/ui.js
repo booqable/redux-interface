@@ -22,6 +22,10 @@ var _reactRedux = require('react-redux');
 
 var _reducer = require('./reducer');
 
+var _cuid = require('cuid');
+
+var _cuid2 = _interopRequireDefault(_cuid);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -127,7 +131,7 @@ function decorate(key) {
       _createClass(ComponentWithKey, [{
         key: 'render',
         value: function render() {
-          this.uiKey = this.uiKey || this.props.uiKey || cuid();
+          this.uiKey = this.uiKey || this.props.uiKey || (0, _cuid2.default)();
 
           return _react2.default.createElement(ConnectedComponent, _extends({ uiKey: this.uiKey }, this.props));
         }
