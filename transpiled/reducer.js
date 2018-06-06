@@ -35,10 +35,10 @@ function reducer() {
       var values = action.payload.values;
 
 
-      var currentValues = state.get(key);
-
-      if (currentValues) {
-        state = state.set(key, currentValues.merge(values));
+      if (state.get(key)) {
+        for (var propertyName in values) {
+          state = state.setIn([key, propertyName], values[propertyName]);
+        }
       }
       break;
     case UNMOUNT_UI:

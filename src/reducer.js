@@ -21,10 +21,10 @@ export default function reducer(state = defaultState, action) {
     case UPDATE_UI:
       const { values } = action.payload
 
-      let currentValues = state.get(key)
-
-      if (currentValues) {
-        state = state.set(key, currentValues.merge(values))
+      if (state.get(key)) {
+        for (let propertyName in values) {
+          state = state.setIn([key, propertyName], values[propertyName])
+        }
       }
       break
     case UNMOUNT_UI:
