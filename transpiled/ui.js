@@ -16,6 +16,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
 var _redux = require('redux');
 
 var _reactRedux = require('react-redux');
@@ -34,12 +36,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var any = _react.PropTypes.any,
-    array = _react.PropTypes.array,
-    func = _react.PropTypes.func,
-    node = _react.PropTypes.node,
-    object = _react.PropTypes.object,
-    string = _react.PropTypes.string;
 function decorate(key) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
@@ -114,7 +110,16 @@ function decorate(key) {
       }]);
 
       return InterfaceComponent;
-    }(_react.Component), _class.displayName = 'ReduxInterface(' + WrappedComponent.displayName + ')', _temp);
+    }(_react.Component), _class.displayName = 'ReduxInterface(' + WrappedComponent.displayName + ')', _class.propTypes = {
+      // State
+      uiKey: _propTypes.string.isRequired,
+      uiDefault: _propTypes.object,
+      ui: _propTypes.object,
+      // Dispatches
+      updateUI: _propTypes.func.isRequired,
+      mountUI: _propTypes.func.isRequired,
+      unmountUI: _propTypes.func.isRequired
+    }, _temp);
 
 
     var ConnectedComponent = connector(InterfaceComponent);
