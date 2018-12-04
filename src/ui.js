@@ -1,7 +1,7 @@
 'use strict'
 
-import React, { Component, PropTypes } from 'react'
-const { any, array, func, node, object, string } = PropTypes
+import React, { Component } from 'react'
+import { string, object, func } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import { updateUI, mountUI, unmountUI } from './reducer'
@@ -37,6 +37,17 @@ export default function decorate(key, opts = {}) {
   return (WrappedComponent) => {
     class InterfaceComponent extends Component {
       static displayName = `ReduxInterface(${WrappedComponent.displayName})`
+
+      static propTypes = {
+        // State
+        uiKey: string.isRequired,
+        uiDefault: object,
+        ui: object,
+        // Dispatches
+        updateUI: func.isRequired,
+        mountUI: func.isRequired,
+        unmountUI: func.isRequired
+      }
 
       componentWillMount() {
         this.props.mountUI(this.props.uiKey, this.props.uiDefaults);
