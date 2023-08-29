@@ -5,7 +5,7 @@ import { string, object, func } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect as reduxConnect } from 'react-redux'
 import { updateUI, mountUI, unmountUI } from './reducer'
-import cuid from 'cuid'
+import { createId } from '@paralleldrive/cuid2'
 
 export default function decorate(key, opts = {}) {
   if (typeof key === 'object') {
@@ -78,7 +78,7 @@ export default function decorate(key, opts = {}) {
 
     class ComponentWithKey extends Component {
       render() {
-        this.uiKey = this.uiKey || this.props.uiKey || cuid()
+        this.uiKey = this.uiKey || this.props.uiKey || createId()
 
         return (
           <ConnectedComponent uiKey={this.uiKey} {...this.props} />

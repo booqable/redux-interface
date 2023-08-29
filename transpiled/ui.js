@@ -24,9 +24,7 @@ var _reactRedux = require('react-redux');
 
 var _reducer = require('./reducer');
 
-var _cuid = require('cuid');
-
-var _cuid2 = _interopRequireDefault(_cuid);
+var _cuid = require('@paralleldrive/cuid2');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -136,7 +134,7 @@ function decorate(key) {
       _createClass(ComponentWithKey, [{
         key: 'render',
         value: function render() {
-          this.uiKey = this.uiKey || this.props.uiKey || (0, _cuid2.default)();
+          this.uiKey = this.uiKey || this.props.uiKey || (0, _cuid.createId)();
 
           return _react2.default.createElement(ConnectedComponent, _extends({ uiKey: this.uiKey }, this.props));
         }
