@@ -1,12 +1,18 @@
 'use strict'
 
 import { Map, Record } from 'immutable'
+import { TextEncoder, TextDecoder } from '@noble/hashes/utils'
 
 export const UPDATE_UI = 'UPDATE_UI'
 const MOUNT_UI = 'MOUNT_UI'
 const UNMOUNT_UI = 'UNMOUNT_UI'
 
 const defaultState = new Map({})
+
+if (typeof this.global.TextEncoder === 'undefined') {
+  this.global.TextEncoder = TextEncoder;
+  this.global.TextDecoder = TextDecoder;
+}
 
 export default function reducer(state = defaultState, action) {
   let key = action.payload && action.payload.key
